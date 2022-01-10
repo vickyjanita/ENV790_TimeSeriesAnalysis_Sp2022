@@ -1,5 +1,6 @@
 # ENVIRON790.30 Time Series Analysis for Energy Data
 
+Student Name: Vicky Janita 
 Course repository for Time Series Analysis at Duke University, spring 2022
 
 
