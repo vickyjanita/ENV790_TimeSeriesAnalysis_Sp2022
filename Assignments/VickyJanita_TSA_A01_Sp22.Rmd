@@ -20,7 +20,7 @@ When you have completed the assignment, **Knit** the text and code into a single
 Q1. What are your previous experiences with time series analysis, R, and Git? 
 
 > Answer: 
-I have a moderate experience with R (from ENV710 applied data analysis) but very little experience with Git and time series analysis. 
+I have a moderate experience with R (from ENV710 applied data analysis) but very little experience with Git and time series analysis. The only time I learned time series was from a short, optional module as part of ENV710 in Fall 2021. 
 
 Q2. Provide a link below to your forked course repository in GitHub. Make sure you have pulled all recent changes from the course repository and that you have updated your course README file as instructed on the recorded video "Getting started with Git and Github". 
 
