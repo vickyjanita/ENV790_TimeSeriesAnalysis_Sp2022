@@ -21,7 +21,10 @@ R packages needed for this assignment:"forecast","tseries", and "dplyr". Install
 
 ```{r}
 #Load/install required package here
-
+library(forecast)
+library(tseries)
+library(dplyr)
+library(readxl)
 ```
 
 
@@ -31,6 +34,8 @@ Consider the data provided in the spreadsheet "Table_10.1_Renewable_Energy_Produ
 
 ```{r}
 #Importing data set
+mainData <- read_excel(path = "~/Library/Mobile Documents/com~apple~CloudDocs/VJ_Duke Documents/Spring 2022/ENV790.3 - Time Series/ENV790_TimeSeriesAnalysis_Sp2022/Data/Table_10.1_Renewable_Energy_Production_and_Consumption_by_Source.xlsx", skip = 10 )
+
 
 ```
 
@@ -40,7 +45,14 @@ You will work only with the following columns: Total Biomass Energy Production, 
 
 ```{r}
 
+energyData <- mainData %>%
+  select(c(1,4,5,6))
+energyData <- energyData[-c(1),]
+head(energyData)
+
 ```
+
+
 
 
 ## Question 2
@@ -48,9 +60,14 @@ Transform your data frame in a time series object and specify the starting point
 
 ```{r}
 
+energyData$Month <- ymd(energyData$Month)
+energyData
+
 ```
 
-
+```{r, plot test}
+plot(energyData[,"Total Biomass Energy Production"],type="l",col="blue",ylab="Trillion BTU",main="Total Biomass Energy Production") 
+```
 ## Question 3
 Compute mean and standard deviation for these three series.
 
