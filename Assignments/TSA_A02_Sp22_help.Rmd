@@ -22,6 +22,14 @@ R packages needed for this assignment:"forecast","tseries", and "dplyr". Install
 ```{r}
 #Load/install required package here
 
+#Option 1
+#install.packages("xlsx")
+library(xlsx)
+
+#Option 2
+#install.packages("readxl")
+library(readxl)
+
 ```
 
 
@@ -30,10 +38,29 @@ R packages needed for this assignment:"forecast","tseries", and "dplyr". Install
 Consider the data provided in the spreadsheet "Table_10.1_Renewable_Energy_Production_and_Consumption_by_Source.xlsx" on our **Data** folder. The data comes from the US Energy Information and Administration and corresponds to the January 2022 Monthly Energy Review. The spreadsheet is ready to be used. Use the command $read.table()$ to import the data in R or $panda.read\_excel()$ in Python (note that you will need to import pandas package). }
 
 ```{r}
-#Importing data set
+#Importing data set - using xlsx package
+energy_data <- read.xlsx(file="./Data/Table_10.1_Renewable_Energy_Production_and_Consumption_by_Source.xlsx",header=FALSE,startRow = 13,sheetIndex=1) #startRow is equivalent to skip on read.table
+
+#Now let's extract the column names from row 11 only
+read_col_names <- read.xlsx(file="./Data/Table_10.1_Renewable_Energy_Production_and_Consumption_by_Source.xlsx",header=FALSE,startRow = 11,endRow=11,sheetIndex=1)
+
+colnames(energy_data) <- read_col_names
+head(energy_data)
 
 ```
 
+```{r}
+#Importing data set - using readxl package
+energy_data2 <- read_xlsx(path="./Data/Table_10.1_Renewable_Energy_Production_and_Consumption_by_Source.xlsx",skip = 11) 
+
+
+#Now let's extract the column names from row 11 only
+read_col_names2 <- read_xlsx(path="./Data/Table_10.1_Renewable_Energy_Production_and_Consumption_by_Source.xlsx",range="A11:N11")
+
+colnames(energy_data2) <- read_col_names2
+head(energy_data2)
+
+```
 
 ## Question 1
 You will work only with the following columns: Total Biomass Energy Production, Total Renewable Energy Production, Hydroelectric Power Consumption. Create a data frame structure with these three time series only. Use the command head() to verify your data.
