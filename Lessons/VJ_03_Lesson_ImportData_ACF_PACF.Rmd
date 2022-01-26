@@ -32,6 +32,8 @@ For this first example we will import water inflow data for reservoirs in Brazil
 * *skip =* : if your file has rows explaining the data or any other rows on the top that need to be skipped you should just set skip to be equal to the number of row that should be skipped before reading the data. Mote that if header=TRUE, you should not skip the row with the header. The defaul is *skip=0*;
 * *dec =* : define *dec="."* or *dec=","* depending on how it's defined on your set. The default is ".".
 
+
+
 ```{r}
 #Importing time series data from text file
 #I am calling it raw for now because it's data as it is in the file

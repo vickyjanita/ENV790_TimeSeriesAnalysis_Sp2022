@@ -25,6 +25,7 @@ library(forecast)
 library(tseries)
 library(dplyr)
 library(readxl)
+library(lubridate)
 ```
 
 
@@ -50,6 +51,12 @@ energyData <- mainData %>%
 energyData <- energyData[-c(1),]
 head(energyData)
 
+colnames(energyData) <-c("Month","BiomassProduction","RE_Production","HydroConsumption")
+
+energyData$RE_Production <- as.numeric(energyData$RE_Production)
+energyData$BiomassProduction <- as.numeric(energyData$BiomassProduction)
+energyData$HydroConsumption <-as.numeric(energyData$HydroConsumption)
+
 ```
 
 
@@ -63,16 +70,27 @@ Transform your data frame in a time series object and specify the starting point
 energyData$Month <- ymd(energyData$Month)
 energyData
 
+myDate <- energyData$Month
+
+ts_energyData <- ts(energyData[,2:4], frequency = 12, start = c(1973,1), end = c(2021,9))
+ts_energyData
+
 ```
 
-```{r, plot test}
-plot(energyData[,"Total Biomass Energy Production"],type="l",col="blue",ylab="Trillion BTU",main="Total Biomass Energy Production") 
-```
+
+
+
 ## Question 3
 Compute mean and standard deviation for these three series.
 
 ```{r}
+meanBiomassProduction <- mean(ts_energyData[,1])
+meanREProduction <- mean(ts_energyData[,2])
+meanHydroConsumption <- mean(ts_energyData[,3])
 
+sdBiomassProduction <- sd(ts_energyData[,1])
+sdREProduction <- sd(ts_energyData[,2])
+sdHydroConsumption <- sd(ts_energyData[,3])
 ```
 
 
@@ -81,6 +99,10 @@ Display and interpret the time series plot for each of these variables. Try to m
 
 ```{r}
 
+plot(ts_energyData[,"RE_Production"],type ="l",col="blue",ylab = "Trillion BTU", ylim = c(100, 1100), main ="Time Series of Renewable Energy Production, Biomass Production, \n and Hydropower Consumption")
+lines(ts_energyData[,"BiomassProduction"],col="red")
+lines(ts_energyData[,"HydroConsumption"],col="green")
+
 ```
 
 
@@ -88,7 +110,7 @@ Display and interpret the time series plot for each of these variables. Try to m
 Compute the correlation between these three series. Are they significantly correlated? Explain your answer.
 
 ```{r}
-
+cor(ts_energyData)
 ```
 
 
@@ -96,15 +118,17 @@ Compute the correlation between these three series. Are they significantly corre
 Compute the autocorrelation function from lag 1 up to lag 40 for these three variables. What can you say about these plots? Do the three of them have the same behavior?
 
 ```{r}
-
+acf(ts_energyData, lag.max = 40)
 ```
+
+Biomass and Renewable energy production shows a similar pattern, while hydro consumption shows a seasonal pattern.
 
 
 ## Question 7
 Compute the partial autocorrelation function from lag 1 to lag 40 for these three variables. How these plots differ from the ones in Q6?
 
 ```{r}
-
+pacf(ts_energyData, lag.max = 40)
 ```
 
 
