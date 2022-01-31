@@ -104,8 +104,8 @@ plot(ts_energyData[,"RE_Production"],type ="l",col="blue",
      main ="Monthly Production or Consumption of Various Energy")
 lines(ts_energyData[,"BiomassProduction"],col="red")
 lines(ts_energyData[,"HydroConsumption"],col="green")
-legend("topleft", legend=c("Renewable Energy Production", 
-                           "Biomass Production", "Hydropower Consumption"),
+legend("topleft", legend=c("Total Renewable Energy Production", 
+                           "Total Biomass Production", "Hydropower Electric Consumption"),
        col=c("blue", "red","green"), lty=1)
 
 ```
